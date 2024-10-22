@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: kafka-config
+    data:
+        server.properties: |
+              broker.id=0
+                  listeners=PLAINTEXT://:9092
+                      zookeeper.connect=zookeeper:2181
+                          log.dirs=/var/lib/kafka/data
