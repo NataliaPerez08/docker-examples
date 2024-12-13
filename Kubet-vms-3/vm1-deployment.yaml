@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vm1
+  namespace: wireguard-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vm1
+  template:
+    metadata:
+      labels:
+        app: vm1
+    spec:
+      containers:
+      - name: wireguard
+        image: linuxserver/wireguard
+        env:
+        - name: TZ
+          value: "UTC"
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - NET_ADMIN
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        ports:
+        - containerPort: 51820
+          protocol: UDP
+      volumes:
+      - name: config
+        configMap:
+          name: wireguard-config
+          items:
+          - key: wg1.conf
+            path: wg0.conf

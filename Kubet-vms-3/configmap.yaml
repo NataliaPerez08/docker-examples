@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wireguard-config
+  namespace: wireguard-namespace
+data:
+  wg1.conf: |
+    [Interface]
+    Address = 10.0.0.1/24
+    PrivateKey = gCTqVDRhsAUfo0+5isC1nI+cnjtpdMVvmFLh/W8y9Uk=
+    ListenPort = 51820
+    [Peer]
+    PublicKey = lF/723p/bIG1wWT3RqfHQtY/cNq2tvhL995litfe6zE=
+    AllowedIPs = 10.0.0.2/32
+    Endpoint = vm2:51820
+
+    [Peer]
+    PublicKey = +hheuLCmJLL5KEESUwJFl+28MOZyHjQnLr79VFoBdTA=
+    AllowedIPs = 10.0.0.3/32
+    Endpoint = vm3:51820
+
+  wg2.conf: |
+    [Interface]
+    Address = 10.0.0.2/24
+    PrivateKey = wKpVHnM7s35V6wRZXEP3UVRGBMANP4vBSniU0lpvyHQ=
+    ListenPort = 51820
+    [Peer]
+    PublicKey = 5rTtV5XrF0Z+WQOWK5pcVHV7r2RSibwW7tfYfjPRt04=
+    AllowedIPs = 10.0.0.1/32
+    Endpoint = vm1:51820
+
+  wg3.conf: |
+    [Interface]
+    Address = 10.0.0.3/24
+    PrivateKey = 0Bz90grPbVJfuS2txU8re9fJ7FQDdZVv0akZ2X1ur0I=
+    ListenPort = 51820
+    [Peer]
+    PublicKey = 5rTtV5XrF0Z+WQOWK5pcVHV7r2RSibwW7tfYfjPRt04=
+    AllowedIPs = 10.0.0.1/32
+    Endpoint = vm1:51820
