@@ -1,0 +1,58 @@
+services:
+  alma1:
+    image: almalinux:9
+    container_name: alma1
+    hostname: alma1
+    tty: true
+    stdin_open: true
+    command: /bin/bash
+    volumes:
+      - ./shared:/shared
+    networks:
+      - almanet
+    cap_add:
+      - NET_ADMIN
+    entrypoint: >
+      /bin/bash -c "dnf update -y &&
+      dnf install -y git net-tools wireguard-tools &&
+      tail -f /dev/null"
+
+  alma2:
+    image: almalinux:9
+    container_name: alma2
+    hostname: alma2
+    tty: true
+    stdin_open: true
+    command: /bin/bash
+    volumes:
+      - ./shared:/shared
+    networks:
+      - almanet
+    cap_add:
+      - NET_ADMIN
+    entrypoint: >
+      /bin/bash -c "dnf update -y &&
+      dnf install -y git net-tools wireguard-tools &&
+      tail -f /dev/null"
+
+  alma3:
+    image: almalinux:9
+    container_name: alma3
+    hostname: alma3
+    tty: true
+    stdin_open: true
+    command: /bin/bash
+    volumes:
+      - ./shared:/shared
+    networks:
+      - almanet
+    cap_add:
+      - NET_ADMIN
+    entrypoint: >
+      /bin/bash -c "dnf update -y &&
+      dnf install -y git net-tools wireguard-tools &&
+      tail -f /dev/null"
+
+networks:
+  almanet:
+    driver: bridge
